@@ -21,7 +21,8 @@ vi /etc/passwd +/lula
 insert
 !x # colocar exclamação pra negar a senha
 
-esc esc : wq enter
+esc esc : wq enter # sair
+!q #sair sem alterar
 
 # arquivo shadow
 
