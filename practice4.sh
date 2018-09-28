@@ -55,3 +55,9 @@ cat /var/log/messages #log no sistema
 #filtrar
 
 tail -f /var/log/messages
+
+# quando é zipado
+zcat messages.2.gz | less
+
+# partições linux -> 1 para o  / ; 2 /tmp; /var; /home; /usr; /opt
+
