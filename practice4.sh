@@ -1,3 +1,5 @@
+LDAP
+
 #todos os processos são filhos do init
 
 ps aux | nl #ver quantidade de processos
