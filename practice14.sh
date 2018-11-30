@@ -1,0 +1,1 @@
+iptables -A forward -d 10.0.0.1 -p tcp -m state --state NEW, INVALID -j DROP

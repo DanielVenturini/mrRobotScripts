@@ -20,5 +20,5 @@ iptables -A FORWARD -p icmp --icmp-type echo-request ! -i vboxnet0 -j DROP
 iptables -A INPUT -p icpm --icmp-type echo-request ! -i vboxnet0 -j DROP
 
 # evitar vários pings
-iptable -F -A INPUT -p icmp --icmp-type echo-request -m limit --limit-burst 4 -j ACCEPT
-iptable -F -A INPUT -p icmp --icmp-type echo-request -j DROP
+iptable -A INPUT -p icmp --icmp-type echo-request -m limit --limit-burst 4 -j ACCEPT
+iptable -A INPUT -p icmp --icmp-type echo-request -j DROP
