@@ -12,7 +12,7 @@ echo "regras de nat"
 # 1
 iptables -t nat -A POSTROUTING -o enp63s0 -j MASQUERADE
 # 2
-iptables -t nat -A PREROUTING -i enp63s0 -p tcp --dport 80 -j REDIRECT --to-ports 81
+iptables -t nat -A PREROUTING -i enp63s0 -p tcp --dport 80 -j DNAT --to 192.168.56.102:81
 # 8
 iptables -A INPUT -p tcp --sport 80 -j ACCEPT
 iptables -A INPUT -p tcp --sport 443 -j ACCEPT
@@ -30,12 +30,12 @@ iptables -A INPUT -p tcp --dport 22 -i vboxnet0 -m mac --mac-source 08:00:27:71:
 iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1 -j ACCEPT
 # 9
 # servidor, quando chegar conexao
-iptables -A INPUT -p tcp -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -p tcp --dport 80 -d 192.168.56.102 -m state --state NEW,ESTABLISHED -j ACCEPT
 # bloqueando acesso a sub-rede
 iptables -A FORWARD -i enp63s0 -p tcp -m state --state NEW,INVALID -j DROP
 
 echo "firewall como cliente"
-iptables -A OUTPUT -p icmp -j DROP
+iptables -A OUTPUT -p icmp --icmp-type echo-request -j DROP
 
 echo "firewall como servidor"
 
